@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Time    : 2019-06-25 20:00
-# @Author  : shefferliao
+# @Author  : alexknight
 # @Site    : 
-# @File    : qmcflac.py.py
+# @File    : qmcflac.py
 # @Desc    :
 import argparse
 import os
