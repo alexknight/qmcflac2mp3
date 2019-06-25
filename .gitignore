@@ -1,0 +1,45 @@
+#See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Ignore logs
+/logs/
+/log/
+*/logs/*
+*/venv/*
+*.log
+
+
+# Ignore swap
+*.swp
+
+#Ignore class file
+*.class
+
+# Ignore pyc
+*.pyc
+
+# Ignore txt
+#*.txt
+
+
+# Ignore mobile_cfg
+*qmsmobinfo.cfg
+
+# Ignore zip
+#*.zip
+
+# Ignore nohup
+nohup.out
+
+# Ignore Mac OS X files
+.DS_Store
+
+
+# Ignore IDE settings
+.settings/
+.idea/
+.project/
+.pydevproject/
+.vscode/
+.__pycache__/
+
+utils/

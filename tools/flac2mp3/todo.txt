@@ -1,0 +1,13 @@
+# To-do:
+#  - Add ReplyGain support
+#  - Double-check how we handle special shell chars in filenames, e.g.
+#    Rock `N' Roll Suicide.flac
+#  - Clean up filepaths (check for double // in dirnames)
+#  - Investigate using Audio::FLAC::Decode and Audio::MPEG instead of
+#    flac and lame programs used from system call
+#  - Write OO Audio file objects that know how to decode/encode/get
+#    tags/set tags for themselves - should open up the way to allow for
+#    transcoding between additional formats.
+#  - google for a standard perl script template include things like
+#    options, pod, GPL statement, how to set program version, etc. etc.
+#  - Use Shell::Quote module
