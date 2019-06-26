@@ -41,7 +41,8 @@ class Convert(object):
 
     def flac_to_mp3(self):
         _tmp_dir = "/tmp/flac"
-        if not os.path.exists(_tmp_dir):
+        if os.path.exists(_tmp_dir):
+            shutil.rmtree(_tmp_dir)
             os.mkdir(_tmp_dir)
         for path in self.flac_files:
             shutil.move(path, _tmp_dir)
@@ -59,6 +60,9 @@ def main():
             help='need to convert')
     # options and flags
     parser.add_argument('-o', '--output-dir', type=os.path.abspath,
+            help='Directory to output transcoded files to')
+
+    parser.add_argument('-t', '--thread-num', type=os.path.abspath,
             help='Directory to output transcoded files to')
 
     args = parser.parse_args()
