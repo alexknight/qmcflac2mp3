@@ -6,10 +6,10 @@
 # @File    : qmcflac.py
 # @Desc    :
 import argparse
+import math
 import os
 import shutil
 import multiprocessing
-
 
 root_path = os.path.abspath(os.path.dirname(__file__))
 qmc2flac_tool = os.path.join(root_path, "tools/qmc2flac/decoder")
@@ -37,17 +37,13 @@ class Convert(object):
 
     def flac_to_mp3(self):
         if self.num == 0:
-            self.__flac_to_mp3(self.flac_files, "/tmp/flac")
+            self.__flac_to_mp3(self.flac_files, os.path.join(root_path, "flac"))
         else:
             print("使用线程池，将启动%d个线程" % self.num)
             groups = self.__chunks(self.flac_files, self.num)
-            for i in range(self.num):
-                p = multiprocessing.Process(target=self.__flac_to_mp3, args=(groups[i], "/tmp/flac-%s" % i))
+            for i in range(len(groups)):
+                p = multiprocessing.Process(target=self.__flac_to_mp3, args=(groups[i], os.path.join(root_path, "flac-%s" % i)))
                 p.start()
-                self.procs.append(p)
-
-            for p in self.procs:
-                p.join()
 
     def __get_origin_files(self):
         origin_files = []
@@ -58,7 +54,9 @@ class Convert(object):
         return origin_files
 
     def __chunks(self, files, n):
-        return [files[i:i + n] for i in range(0, len(files), n)]
+        size = len(files)
+        list_size = math.ceil(size / n)
+        return [files[i:i + list_size] for i in range(0, size, list_size)]
 
     def __get_proc_num(self):
         size = len(self.qmc_files)
