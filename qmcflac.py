@@ -26,14 +26,6 @@ class Convert(object):
         self.procs =[]
         self.num = num if num != 0 else self.__get_proc_num()
 
-    def __get_origin_files(self):
-        origin_files = []
-        files = os.listdir(self.input)
-        for file in files:
-            if file.endswith(".qmcflac"):
-                origin_files.append(os.path.join(self.input, file))
-        return origin_files
-
     def qmc_to_flac(self):
         os.chdir(self.input)
         cmd = qmc2flac_tool
@@ -42,21 +34,6 @@ class Convert(object):
         self.flac_files = [x.replace(".qmcflac", ".flac") for x in self.qmc_files]
         print("qmc_to_flac convert finish.")
         return self
-
-    def __flac_to_mp3(self, flac_files, _tmp_dir):
-        if os.path.exists(_tmp_dir):
-            shutil.rmtree(_tmp_dir)
-        os.mkdir(_tmp_dir)
-        for path in flac_files:
-            shutil.move(path, _tmp_dir)
-        cmd = "%s %s %s" % (flac2mp3_tool, _tmp_dir, self.output)
-        print(cmd)
-        os.system(cmd)
-        shutil.rmtree(_tmp_dir)
-        print("%s flac_to_mp3 convert finish." % _tmp_dir)
-
-    def __chunks(self, files, n):
-        return [files[i:i + n] for i in range(0, len(files), n)]
 
     def flac_to_mp3(self):
         if self.num == 0:
@@ -72,10 +49,33 @@ class Convert(object):
             for p in self.procs:
                 p.join()
 
+    def __get_origin_files(self):
+        origin_files = []
+        files = os.listdir(self.input)
+        for file in files:
+            if file.endswith(".qmcflac"):
+                origin_files.append(os.path.join(self.input, file))
+        return origin_files
+
+    def __chunks(self, files, n):
+        return [files[i:i + n] for i in range(0, len(files), n)]
+
     def __get_proc_num(self):
         size = len(self.qmc_files)
         num = int(size / 5)
         return num if num <= 8 else 8
+
+    def __flac_to_mp3(self, flac_files, _tmp_dir):
+        if os.path.exists(_tmp_dir):
+            shutil.rmtree(_tmp_dir)
+        os.mkdir(_tmp_dir)
+        for path in flac_files:
+            shutil.move(path, _tmp_dir)
+        cmd = "%s %s %s" % (flac2mp3_tool, _tmp_dir, self.output)
+        print(cmd)
+        os.system(cmd)
+        shutil.rmtree(_tmp_dir)
+        print("%s flac_to_mp3 convert finish." % _tmp_dir)
 
 
 def main():
