@@ -10,7 +10,7 @@ python qmcflac.py -o /tmp/mp3_dir -i /tmp/qmcflac_dir
 -o: 转换mp3输出目录
 -i: 原始qmcflac目录
 -n: 转换文件的进程数，如果不指定，脚本会自动根据转换数量自动决定进程数
--m: 可以输入`qmc2mp3`/`flac2mp3`/`qmc2flac`三种模式，不指定，则默认为`qmc2mp3`
+-m: 可以输入"qmc2mp3"/"flac2mp3"/"qmc2flac"三种模式，不指定，则默认为"qmc2mp3"
 ```
 
 ## 感谢
