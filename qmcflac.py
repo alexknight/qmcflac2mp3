@@ -94,7 +94,7 @@ def read_args():
     parser.add_argument('-o', '--output-dir', type=os.path.abspath,
             help='Directory to output transcoded files to')
 
-    parser.add_argument('-m', '--mode', choices=('qmc2flac', 'flac2mp3', 'qmc2mp3'), default='qmc2flac')
+    parser.add_argument('-m', '--mode', choices=('qmc2flac', 'flac2mp3', 'qmc2mp3'), default='qmc2mp3')
 
     parser.add_argument('-n', '--thread-num', type=int,
             help='convert thread num')
